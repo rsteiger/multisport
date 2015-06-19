@@ -1,0 +1,26 @@
+language: python
+language: objective-c
+
+before_install:
+  - export PROJECT_DIR=$(pwd)
+  - sudo apt-get update -qq
+
+install:
+  # Install Bazel.
+  - sudo add-apt-repository ppa:webupd8team/java -y
+  - sudo apt-get update -y
+  - sudo apt-get install oracle-java8-installer -y
+  - sudo apt-get install oracle-java8-set-default -y
+  - export JAVA_HOME='/usr/lib/jvm/java-8-oracle'
+  - sudo apt-get install libarchive-dev pkg-config zip g++ zlib1g-dev -y
+  - cd $HOME
+  - git clone https://github.com/google/bazel
+  - cd bazel
+  - ./compile.sh
+  - export PATH="$PATH:$HOME/bazel/output"
+
+before_script:
+  - cd $PROJECT_DIR
+
+script:
+   - bazel build //...
