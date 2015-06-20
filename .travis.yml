@@ -14,4 +14,4 @@ before_script:
   - cd $PROJECT_DIR
 
 script:
-   - blaze build :all
+   - bazel build :all
